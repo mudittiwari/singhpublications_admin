@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import axios from 'axios';
 function AdminLogin() {
     const navigate = useNavigate();
     // const history=use
@@ -9,10 +10,10 @@ function AdminLogin() {
     const [password, changepassword] = useState('');
     useEffect(()=>{
         // console.log(localStorage.getItem('user'));
-        if(localStorage.getItem('user')){
+        if(localStorage.getItem('pubadmin')){
             console.log('hello');
-        if(JSON.parse(localStorage.getItem('user'))["isAdmin"]==true){
-            navigate('/addblog')
+        if(JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"]==true){
+            console.log("user found");
     }
     else
     {
@@ -46,11 +47,25 @@ function AdminLogin() {
 
                 <button type="button" className="text-white block mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={async (e) => {
                     e.preventDefault();
-                    if(email==='MahendraDaiman@gmail.com' || password==='ChemNilonVistas1256%&'){
-                        let user={'email':email,'isAdmin':true};
-                        localStorage.setItem('user',JSON.stringify(user));
-                        navigate('/addblog');
+                    axios.post("https://singh-publication.onrender.com/api/user/login", {
+                        email: email,
+                        // mobileNumber: mobileNumber,
+                        password: password,
+                    }).then((res) => {
+                        console.log(res);
+                        if (res.status===200) {
+                            // localStorage.setItem("pubuser", JSON.stringify(res.data));
+                            // console.log(localStorage.getItem("pubuser"));
+                            console.log(res.data);
+                            localStorage.setItem('pubadmin',JSON.stringify(res.data));
+                            navigate('/addproduct');
+                        } else {
+                            alert("Invalid Credentials");
+                        }
+                    }).catch((err) => {
+                        console.log(err);
                     }
+                    )
 
                 }}>Login</button>
             </div>

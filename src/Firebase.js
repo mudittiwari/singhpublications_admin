@@ -5,13 +5,21 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDXLjVr0ZFREy3Uc7oxXRbIKCV5LRe1Jnc",
-  authDomain: "zulu-forum.firebaseapp.com",
-  projectId: "zulu-forum",
-  storageBucket: "zulu-forum.appspot.com",
-  messagingSenderId: "682276189872",
-  appId: "1:682276189872:web:a48bc45ce7a2cd0d38ad75"
+
+  apiKey: "AIzaSyCWxMEkCItyp74PKy6oUFUXfButIJ67ZrU",
+
+  authDomain: "singhpublication-c6dd4.firebaseapp.com",
+
+  projectId: "singhpublication-c6dd4",
+
+  storageBucket: "singhpublication-c6dd4.appspot.com",
+
+  messagingSenderId: "177432854050",
+
+  appId: "1:177432854050:web:b00d44c7539006f7d6d47b"
+
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
