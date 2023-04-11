@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { getFirestore, collection, addDoc, deleteDoc } from "firebase/firestore";
-
-import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import app from './Firebase';
+import { getStorage,ref,getDownloadURL, uploadBytesResumable  } from "firebase/storage";
+import { getFirestore,collection,addDoc,updateDoc,doc } from "firebase/firestore";
 import axios from "axios";
-function Addproduct() {
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import app from './Firebase';
+function Editproduct() {
+    const location = useLocation();
     const navigate = useNavigate();
     const storage = getStorage(app);
     const db = getFirestore(app);
@@ -27,8 +27,7 @@ function Addproduct() {
     const [title, changetitle] = useState('');
     const [subtitle, changesubtitle] = useState('');
     const [language, changelanguage] = useState('');
-    const [desc, changedesc] = useState('');
-
+    const [desc, changedesc] = useState('');   
     const upload = async () => {
         // e.preventDefault();
         // console.log(image);
@@ -105,11 +104,30 @@ function Addproduct() {
         // changeupstatus(false);
 
     }
+    useEffect(()=>{
+        changetitle(location.state.data.title)
+        changesubtitle(location.state.data.subtitle)
+        changelanguage(location.state.data.language)
+        changedesc(location.state.data.description)
+        changeauthor(location.state.data.author)
+        changepublisher(location.state.data.publisher)
+        changeprice(location.state.data.price)
+        changecategory(location.state.data.category)
+        changepaperback(location.state.data.paperback)
+        changeisbn(location.state.data.isbn)
+        changeisbn13(location.state.data.isbn13)
+        changedimensions(location.state.data.dimensions)
+        changeweight(location.state.data.weight)
+        changeage(location.state.data.age)
+        // changeimagearray(location.state.data.imagearray)
+        changefile(location.state.data.file)
+
+    },[])
     return (
         <>
             {/* <LoadingBar style={{ 'backgroundColor': 'red', 'zIndex': 10 }} ref={ref} /> */}
             <div className="w-3/4 mx-auto my-5">
-                <h1 className="text-black text-xl font-bold my-10 mx-auto w-1/2 text-center">Add product</h1>
+                <h1 className="text-black text-xl font-bold my-10 mx-auto w-1/2 text-center">Edit product</h1>
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="text" onChange={(e) => {
                         changetitle(e.target.value);
@@ -219,7 +237,7 @@ function Addproduct() {
                         today = mm + '-' + dd + '-' + yyyy;
                         // console.log(imagearray[0])
                         // document.write(today);
-                        axios.post('http://localhost:1234/api/product/addproduct', {
+                        axios.post('http://localhost:1234/api/product/updateproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,
@@ -245,6 +263,9 @@ function Addproduct() {
                         },{
                             headers: {
                                 'Authorization': `Bearer ${pubadmin.accessToken}`
+                            },
+                            params: {
+                                id: location.state.id
                             }
                         },).then((res) => {
                             console.log(res.data);
@@ -253,7 +274,7 @@ function Addproduct() {
                         });
                         console.log(imagearray);
                         changeimagearray([]);
-                    }}>Submit</button>
+                    }}>Update</button>
                 </div>
             </div>
         </>
@@ -261,4 +282,4 @@ function Addproduct() {
 }
 
 
-export default Addproduct;
+export default Editproduct;

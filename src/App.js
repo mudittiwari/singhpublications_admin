@@ -2,11 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Addproduct from './Addproduct';
-import Complains from './Complains';
+import Complains from './Orders';
 import AdminLogin from './Adminlogin';
 import Navbar from './Navbar';
-import Blogs from './Blogs';
-import Editblog from './Editblog';
+import Products from './Products';
+import Editproduct from './Editproduct';
+import Orders from './Orders';
 function App() {
 
   return (
@@ -16,10 +17,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<AdminLogin />} />
           <Route exact path="/addproduct" element={<Addproduct />} />
-          <Route exact path="/complain" element={<Complains />} />
+          <Route exact path="/Orders" element={<Orders />} />
           <Route exact path="/login" element={<AdminLogin />} />
-          <Route exact path="/blogs" element={<Blogs />} />
-          <Route exact path="/editblog" element={<Editblog />} />
+          <Route exact path="/products" element={<Products />} />
+          <Route exact path="/editproduct" element={<Editproduct />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

@@ -47,12 +47,13 @@ function AdminLogin() {
 
                 <button type="button" className="text-white block mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={async (e) => {
                     e.preventDefault();
-                    axios.post("https://singh-publication.onrender.com/api/user/login", {
+                    axios.post("http://localhost:1234/api/user/login", {
                         email: email,
                         // mobileNumber: mobileNumber,
                         password: password,
                     }).then((res) => {
                         console.log(res);
+                        
                         if (res.status===200) {
                             // localStorage.setItem("pubuser", JSON.stringify(res.data));
                             // console.log(localStorage.getItem("pubuser"));
