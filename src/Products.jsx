@@ -16,7 +16,7 @@ function Products() {
     const [productsarray, changeproductsarray] = useState([]);
     async function getproducts() {
         const products = [];
-        axios.get('http://localhost:5000/api/product/getproducts').then((res) => {
+        axios.get('https://singh-publications.onrender.com/api/product/getproducts').then((res) => {
             // console.log(res.data);
             changeproductsarray(res.data);
             console.log(res.data)
@@ -127,7 +127,7 @@ function Products() {
                                         console.log(pubadmin.accessToken)
                                         e.preventDefault();
                                         // console.log(value.id)
-                                        axios.delete("http://localhost:5000/api/product/deleteproduct", {
+                                        axios.delete("https://singh-publications.onrender.com/api/product/deleteproduct", {
                                             headers: {
                                                 'Authorization': `Bearer ${pubadmin.accessToken}`
                                             },

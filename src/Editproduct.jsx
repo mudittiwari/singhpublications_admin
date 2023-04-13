@@ -248,7 +248,7 @@ function Editproduct() {
                         today = mm + '-' + dd + '-' + yyyy;
                         // console.log(imagearray[0])
                         // document.write(today);
-                        axios.post('http://localhost:5000/api/product/updateproduct', {
+                        axios.post('https://singh-publications.onrender.com/api/product/updateproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,
