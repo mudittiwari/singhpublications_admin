@@ -279,11 +279,12 @@ function Editproduct() {
                                 id: location.state.id
                             }
                         },).then((res) => {
+                            navigate('/products')
                             console.log(res.data);
                         }).catch((err) => {
                             console.log(err);
                         });
-                        console.log(imagearray);
+                        // console.log(imagearray);
                         changeimagearray([]);
                     }}>Update</button>
                 </div>
