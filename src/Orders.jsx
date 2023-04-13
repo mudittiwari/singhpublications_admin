@@ -97,6 +97,7 @@ function Orders() {
     // console.log(elements);
     return (
         <div>
+            <h1 className="text-black text-xl font-bold my-10 mx-auto w-1/2 text-center">Orders</h1>
             <ul>
 
                 {ordersarray.map((value, index) => {
