@@ -105,6 +105,20 @@ function Addproduct() {
         // changeupstatus(false);
 
     }
+    useEffect(() => {
+        // console.log(localStorage.getItem('user'));
+        if (localStorage.getItem('pubadmin')) {
+            if (JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"] == true) {
+                // getproducts();
+            }
+            else {
+                navigate('/login');
+            }
+        }
+        else {
+            navigate('/login');
+        }
+    }, [])
     return (
         <>
             {/* <LoadingBar style={{ 'backgroundColor': 'red', 'zIndex': 10 }} ref={ref} /> */}
@@ -219,7 +233,7 @@ function Addproduct() {
                         today = mm + '-' + dd + '-' + yyyy;
                         // console.log(imagearray[0])
                         // document.write(today);
-                        axios.post('http://localhost:1234/api/product/addproduct', {
+                        axios.post('http://localhost:5000/api/product/addproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,

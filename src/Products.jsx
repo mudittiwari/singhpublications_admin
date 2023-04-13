@@ -16,7 +16,7 @@ function Products() {
     const [productsarray, changeproductsarray] = useState([]);
     async function getproducts() {
         const products = [];
-        axios.get('http://localhost:1234/api/product/getproducts').then((res) => {
+        axios.get('http://localhost:5000/api/product/getproducts').then((res) => {
             // console.log(res.data);
             changeproductsarray(res.data);
             console.log(res.data)
@@ -25,8 +25,8 @@ function Products() {
     }
     useEffect(() => {
         // console.log(localStorage.getItem('user'));
-        if (localStorage.getItem('user')) {
-            if (JSON.parse(localStorage.getItem('user'))["isAdmin"] == true) {
+        if (localStorage.getItem('pubadmin')) {
+            if (JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"] == true) {
                 getproducts();
             }
             else {
@@ -127,7 +127,7 @@ function Products() {
                                         console.log(pubadmin.accessToken)
                                         e.preventDefault();
                                         // console.log(value.id)
-                                        axios.delete("http://localhost:1234/api/product/deleteproduct", {
+                                        axios.delete("http://localhost:5000/api/product/deleteproduct", {
                                             headers: {
                                                 'Authorization': `Bearer ${pubadmin.accessToken}`
                                             },

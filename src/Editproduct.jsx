@@ -105,6 +105,17 @@ function Editproduct() {
 
     }
     useEffect(()=>{
+        if (localStorage.getItem('pubadmin')) {
+            if (JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"] == true) {
+                // getproducts();
+            }
+            else {
+                navigate('/login');
+            }
+        }
+        else {
+            navigate('/login');
+        }
         changetitle(location.state.data.title)
         changesubtitle(location.state.data.subtitle)
         changelanguage(location.state.data.language)
@@ -237,7 +248,7 @@ function Editproduct() {
                         today = mm + '-' + dd + '-' + yyyy;
                         // console.log(imagearray[0])
                         // document.write(today);
-                        axios.post('http://localhost:1234/api/product/updateproduct', {
+                        axios.post('http://localhost:5000/api/product/updateproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,
