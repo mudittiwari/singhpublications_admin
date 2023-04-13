@@ -31,6 +31,7 @@ function Orders() {
         if (localStorage.getItem('pubadmin')) {
             if (JSON.parse(localStorage.getItem('pubadmin'))["role"] == "admin") {
                 // getproducts();
+                getorders();
             }
             else {
                 navigate('/login');
