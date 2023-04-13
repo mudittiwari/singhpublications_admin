@@ -26,8 +26,8 @@ function Products() {
     useEffect(() => {
         // console.log(localStorage.getItem('user'));
         if (localStorage.getItem('pubadmin')) {
-            if (JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"] == true) {
-                getproducts();
+            if (JSON.parse(localStorage.getItem('pubadmin'))["role"] == "admin") {
+                // getproducts();
             }
             else {
                 navigate('/login');

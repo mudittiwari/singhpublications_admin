@@ -11,7 +11,7 @@ function AdminLogin() {
     useEffect(()=>{
         // console.log(localStorage.getItem('user'));
         if(localStorage.getItem('pubadmin')){
-            console.log('hello');
+            // console.log('hello');
         if(JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"]==true){
             console.log("user found");
     }
@@ -47,18 +47,18 @@ function AdminLogin() {
 
                 <button type="button" className="text-white block mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={async (e) => {
                     e.preventDefault();
-                    console.log("mudittiwari")
-                    axios.post("https://singh-publications.onrender.com/api/user/login", {
+                    // console.log("mudittiwari")
+                    axios.post("http://localhost:5000/api/user/login", {
                         email: email,
                         // mobileNumber: mobileNumber,
                         password: password,
                     }).then((res) => {
-                        console.log(res);
+                        // console.log(res);
                         
                         if (res.status===200) {
                             // localStorage.setItem("pubuser", JSON.stringify(res.data));
                             // console.log(localStorage.getItem("pubuser"));
-                            console.log(res.data);
+                            // console.log(res.data);
                             localStorage.setItem('pubadmin',JSON.stringify(res.data));
                             navigate('/addproduct');
                         } else {

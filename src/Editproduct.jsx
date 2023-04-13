@@ -106,7 +106,7 @@ function Editproduct() {
     }
     useEffect(()=>{
         if (localStorage.getItem('pubadmin')) {
-            if (JSON.parse(localStorage.getItem('pubadmin'))["isAdmin"] == true) {
+            if (JSON.parse(localStorage.getItem('pubadmin'))["role"] == "admin") {
                 // getproducts();
             }
             else {
