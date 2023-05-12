@@ -23,6 +23,7 @@ function Addproduct() {
     const [age, changeage] = useState('');
     const [imagearray, changeimagearray] = useState([]);
     const [file, changefile] = useState('');
+    const [fileurl, changefileurl] = useState('');
     const [image, setImage] = useState('');
     const [title, changetitle] = useState('');
     const [subtitle, changesubtitle] = useState('');
@@ -94,7 +95,7 @@ function Addproduct() {
                 // console.log(submit_status, upload_status);
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     // console.log(downloadURL);
-                    changefile(downloadURL);
+                    changefileurl(downloadURL);
                 });
                 // ref.current.complete();
                 // changeupstatus(false);
@@ -242,7 +243,7 @@ function Addproduct() {
                             "isbn": isbn,
                             "isbn13": isbn13,
                             "dimensions": dimensions,
-                            "file": file,
+                            "file": fileurl,
                             "weight": weight,
                             "age": age,
                             "subtitle": subtitle,
