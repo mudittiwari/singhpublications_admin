@@ -96,6 +96,7 @@ function Addproduct() {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     // console.log(downloadURL);
                     changefileurl(downloadURL);
+                    console.log(fileurl);
                 });
                 // ref.current.complete();
                 // changeupstatus(false);
@@ -234,6 +235,7 @@ function Addproduct() {
                         today = mm + '-' + dd + '-' + yyyy;
                         // console.log(imagearray[0])
                         // document.write(today);
+                        console.log(fileurl);
                         axios.post('https://singh-publications.onrender.com/api/product/addproduct', {
                             "title": title,
                             "author": author,
