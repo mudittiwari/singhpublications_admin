@@ -21,7 +21,7 @@ function Addproduct() {
     const [dimensions, changedimensions] = useState('');
     const [weight, changeweight] = useState('');
     const [age, changeage] = useState('');
-    const [imagearray, changeimagearray] = useState([]);
+    const [imageurl, changeimageurl] = useState('');
     const [file, changefile] = useState('');
     const [fileurl, changefileurl] = useState('');
     const [image, setImage] = useState('');
@@ -31,80 +31,54 @@ function Addproduct() {
     const [desc, changedesc] = useState('');
 
     const upload = async () => {
-        // e.preventDefault();
-        // console.log(image);
         if (image == null)
             return;
-        // changeupstatus(true);
-        // changesubstatus(true);
 
-        // ref.current.continuousStart(0);
         const storageRef = ref(storage, `files/${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image);
         uploadTask.on('state_changed',
             (snapShot) => {
-                //takes a snap shot of the process as it is happening
+
                 console.log(snapShot);
             }, (err) => {
-                //catches the errors
+
                 console.log(err);
-                // ref.current.complete();
-                // changeupstatus(false);
-                // changesubstatus(false);
+
             }, () => {
-                // gets the functions from storage refences the image storage in firebase by the children
-                // gets the download url then sets the image from firebase as the value for the imgUrl key:
-                // console.log(submit_status, upload_status);
+                
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    // console.log(downloadURL);
-                    changeimagearray([...imagearray, downloadURL]);
+
+                   changeimageurl(downloadURL);
+
                 });
-                // ref.current.complete();
-                // changeupstatus(false);
-                // changesubstatus(false);
+
             });
 
-        // console.log(submit_status,upload_status);
-        // changeupstatus(false);
 
     }
     const uploadfile = async () => {
-        // e.preventDefault();
-        // console.log(image);
+
         if (file == null)
             return;
-        // changeupstatus(true);
-        // changesubstatus(true);
 
-        // ref.current.continuousStart(0);
         const storageRef = ref(storage, `files/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on('state_changed',
             (snapShot) => {
-                //takes a snap shot of the process as it is happening
+                
                 console.log(snapShot);
             }, (err) => {
                 //catches the errors
                 console.log(err);
-                // ref.current.complete();
-                // changeupstatus(false);
-                // changesubstatus(false);
+                
             }, () => {
-                // gets the functions from storage refences the image storage in firebase by the children
-                // gets the download url then sets the image from firebase as the value for the imgUrl key:
-                // console.log(submit_status, upload_status);
+               
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    // console.log(downloadURL);
                     changefileurl(downloadURL);
-                    console.log(fileurl);
                 });
-                // ref.current.complete();
-                // changeupstatus(false);
-                // changesubstatus(false);
             });
 
-        // console.log(submit_status,upload_status);
-        // changeupstatus(false);
+        
 
     }
     useEffect(() => {
@@ -236,7 +210,7 @@ function Addproduct() {
                         // console.log(imagearray[0])
                         // document.write(today);
                         console.log(fileurl);
-                        axios.post('https://singh-publications.onrender.com/api/product/addproduct', {
+                        axios.post('https://singhpublications.onrender.com/api/product/addproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,
@@ -252,7 +226,7 @@ function Addproduct() {
                             "category": category,
                             "description": desc,
                             "rating": 0,
-                            "image_url": imagearray[0],
+                            "image_url": imageurl,
                             "total_rating": 0,
                             "reviews": [],
                             "price": price,
@@ -268,8 +242,8 @@ function Addproduct() {
                         }).catch((err) => {
                             console.log(err);
                         });
-                        console.log(imagearray);
-                        changeimagearray([]);
+                        console.log(imageurl);
+                        
                     }}>Submit</button>
                 </div>
             </div>
