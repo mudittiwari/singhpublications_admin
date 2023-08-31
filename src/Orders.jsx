@@ -16,7 +16,7 @@ function Orders() {
     const [pubadmin, changepubadmin] = useState(JSON.parse(localStorage.getItem('pubadmin')));
     const [ordersarray, changeordersarray] = useState([]);
     async function getorders() {
-        axios.get('https://singhpublications.onrender.com/api/order/getallorders', {
+        axios.get('https://singhpublication.in/api/order/getallorders', {
             headers: {
                 'Authorization': `Bearer ${pubadmin.accessToken}`
             }
@@ -69,7 +69,7 @@ function Orders() {
                 getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
                     // console.log(downloadURL);
                     changefile(downloadURL);
-                    await axios.put('https://singhpublications.onrender.com/api/order/updateinvoice', {
+                    await axios.put('https://singhpublication.in/api/order/updateinvoice', {
                         "order_id": id,
                         "invoice_file": downloadURL,
                         "useremail":ordered_by
@@ -130,7 +130,7 @@ function Orders() {
 
                         today = mm + '-' + dd + '-' + yyyy;
                         console.log(today);
-                                            await axios.put('https://singhpublications.onrender.com/api/order/updatedelivery', {
+                                            await axios.put('https://singhpublication.in/api/order/updatedelivery', {
                                                 "order_id": value.id,
                                                 "delivery_status":"Delivered",
                                                 "useremail":value.ordered_by,

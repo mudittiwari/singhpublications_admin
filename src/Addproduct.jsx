@@ -24,6 +24,8 @@ function Addproduct() {
     const [imageurl, changeimageurl] = useState('');
     const [file, changefile] = useState('');
     const [fileurl, changefileurl] = useState('');
+    const [audiofile, changeaudiofile] = useState('');
+    const [audiofileurl, changeaudiofileurl] = useState('');
     const [image, setImage] = useState('');
     const [title, changetitle] = useState('');
     const [subtitle, changesubtitle] = useState('');
@@ -75,6 +77,31 @@ function Addproduct() {
                
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     changefileurl(downloadURL);
+                });
+            });
+
+        
+
+    }
+    const uploadaudiofile = async () => {
+
+        if (audiofile == null)
+            return;
+
+        const storageRef = ref(storage, `files/${audiofile.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, audiofile);
+        uploadTask.on('state_changed',
+            (snapShot) => {
+                
+                console.log(snapShot);
+            }, (err) => {
+                //catches the errors
+                console.log(err);
+                
+            }, () => {
+               
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    changeaudiofileurl(downloadURL);
                 });
             });
 
@@ -197,7 +224,16 @@ function Addproduct() {
                             uploadfile();
 
                             // e.preventDefault();
-                        }}>Upload File</button>
+                        }}>Upload pdf File</button>
+                    </div>
+                    <div className="mb-10">
+                        <input type="file" onChange={(e) => { changeaudiofile(e.target.files[0]) }} />
+                        <button className="bg-white text-black w-max rounded-lg border-0 px-3 py-2 my-2 mx-8" style={{ 'border': '1px solid black' }} onClick={async (e) => {
+                            e.preventDefault();
+                            uploadaudiofile();
+
+                            // e.preventDefault();
+                        }}>Upload audio File</button>
                     </div>
                     <button type="button" className="bg-white text-black w-24 rounded-lg border-0 px-3 py-2 my-2 mx-8" style={{ 'border': '1px solid black' }} onClick={async (e) => {
                         console.log(pubadmin.accessToken)
@@ -210,7 +246,8 @@ function Addproduct() {
                         // console.log(imagearray[0])
                         // document.write(today);
                         console.log(fileurl);
-                        axios.post('https://singhpublications.onrender.com/api/product/addproduct', {
+                        if(category==="E-BOOK"){
+                        axios.post('http://singhpublication.in/api/product/addproduct', {
                             "title": title,
                             "author": author,
                             "publisher": publisher,
@@ -219,7 +256,8 @@ function Addproduct() {
                             "isbn": isbn,
                             "isbn13": isbn13,
                             "dimensions": dimensions,
-                            "file": fileurl,
+                            "pdffile": fileurl,
+                            "audiofile":audiofileurl,
                             "weight": weight,
                             "age": age,
                             "subtitle": subtitle,
@@ -243,6 +281,43 @@ function Addproduct() {
                             console.log(err);
                         });
                         console.log(imageurl);
+                    }
+                    else{
+                        axios.post('https://singhpublication.in/api/product/addproduct', {
+                            "title": title,
+                            "author": author,
+                            "publisher": publisher,
+                            "language": language,
+                            "paperback": 2,
+                            "isbn": isbn,
+                            "isbn13": isbn13,
+                            "dimensions": dimensions,
+                            "pdffile": "no file",
+                            "audiofile":"no file",
+                            "weight": weight,
+                            "age": age,
+                            "subtitle": subtitle,
+                            "category": category,
+                            "description": desc,
+                            "rating": 0,
+                            "image_url": imageurl,
+                            "total_rating": 0,
+                            "reviews": [],
+                            "price": price,
+                            "created_by": "admin",
+                            
+                            
+                        },{
+                            headers: {
+                                'Authorization': `Bearer ${pubadmin.accessToken}`
+                            }
+                        },).then((res) => {
+                            console.log(res.data);
+                        }).catch((err) => {
+                            console.log(err);
+                        });
+                        console.log(imageurl);
+                    }
                         
                     }}>Submit</button>
                 </div>
